@@ -1,0 +1,179 @@
+\subsection{Purpose}
+The objective of this Requirements Analysis and Specification Document (RASD) is to delineate the foundational framework for the proposed CodeKataBattle platform (CKB). This comprehensive document will thoroughly detail the functional and non-functional requisites of CKB while outlining system's constraints and boundaries. Primarily, this RASD serves as a directive for the development team tasked with implementing the specified requirements. Simultaneously, it acts as a contractual foundation for stakeholders and end-users, ensuring clarity and alignment between expectations and system capabilities. As such, precision in terminology is important, with explicit definitions provided to enhance mutual understanding. \\
+The CKB platform introduces a revolutionary approach to enhancing students' software development proficiency through collaborative training in code kata exercises. Oriented towards creating a competitive yet supportive learning environment. Educators are enabled to construct engaging challenges for students from the platform. These challenges involve teams of students competing to demonstrate and refine their coding skills.
+
+\subsubsection{Goals}
+Here are the goals to achieve by implementing the CodeKataBattle (CKB) software:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        G1 & Educator can create tournaments and battles setting all the necessary parameters and\\& badges \\
+        \hline
+        G2 & Student can complete battles on their own or in groups by providing their code \\
+        \hline
+        G3 & Educator that creates a tournament can allow other educators to add battles to the\\&tournament\\
+        \hline
+        G4 & Students and educators can see the list of ongoing and terminated tournaments and\\&the corresponding rank \\
+        \hline
+        G5 & Students and educators can see the current rank of every battle they are involved in \\
+        \hline
+        G6 & Educator can go through the sources produced by a team and manually assign a score \\
+        \hline
+        G7 & Educators and students can visualize all badges and every student’s collected badges \\
+        \hline
+    \end{tabular}
+    \caption{Goals of the system}
+    \label{tab:goals}
+\end{table}
+
+\subsection{Scope}
+In the fast-evolving landscape of today's technological era, the demand for adept software developers continues to rise. As the significance of collaborative learning and practical skill development becomes increasingly apparent, educational platforms are crucial in shaping the next generation of software engineers. \\
+CodeKataBattle (CKB) emerges as an innovative solution, providing a dynamic platform to practice their software development skills collaboratively. In a society where real-world coding challenges and industry-relevant practices are fundamental, CKB bridges the gap between theoretical knowledge and practical application. CKB not only proves instrumental in individual skill enhancement but also promotes a sense of healthy competition. This platform aligns with the contemporary need for hands-on, team-oriented learning experiences.
+\\ CKB serves as a vital tool in preparing students for the challenges of today's technology-driven society, where adaptability and collaborative problem-solving are key components of success.
+\subsubsection{Description of the system}
+CKB is a project aimed to help people to learn how to code but also to improve their software development skills, offering a dynamic and interactive environment for users to engage in collaborative learning. It supports two types of users:
+\begin{itemize}
+  \item Students
+  \item Educators
+\end{itemize}
+The platform facilitates the creation and management of code kata battles, where students can compete against each other to solve programming exercises in lots of different languages of choice, 
+either by themselves or joining a team.  \\
+Educators, creating code kata battles, challenge teams of students to compete against each other with diverse coding scenarios, allowing students of proving and improving not just their coding abilities but also their collaboration abilities by working in teams. \\
+Each battle follows a structured timeline from registration to final submission, with GitHub integration for code versioning and automated assessment.
+The system also provides a test-first approach and automated evaluation of functional aspects, timeliness, and source code quality. \\
+The platform extends beyond individual battles: educators can also create tournaments, where different educators can add their challenges. Students can subscribe to tournaments and solve the contained battles. The platform will then provide for each tournament a rank that reflects students' cumulative performance. \\
+The scope includes features for educators to create, configure, and close tournaments, and for students to visualize tournament's rank. \\
+In addition, the system introduces badges that allow educators to define and award achievements based on specific criteria and students to improve their competitiveness, since gained badges are visible to all students and educators. \\
+\subsubsection{World phenomena}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        WP1 & Student wants to learn or practice a programming language \\
+        \hline
+        WP2 & Educator knows a programming language and wants to teach it \\
+        \hline
+        WP3 & Student uses GitHub Action to work on a project \\
+        \hline
+        WP4 & Educator writes battle's code and its tests' code \\
+        \hline
+        WP5 & Student develops a challenge's solution \\
+        \hline
+    \end{tabular}
+    \caption{World phenomena of the system}
+    \label{tab:goals}
+\end{table}
+
+\newpage
+
+\subsubsection{Shared phenomena}
+Shared phenomena are divided in:\\
+\textbf{Controlled by the world and observed by the machine:}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        SP1 & Student creates an account into the system by using a specific form \\
+        \hline
+        SP2 & Educator creates an account into the system by using a specific form \\
+        \hline
+        SP3 & Student logs into the system by using a specific form \\
+        \hline
+        SP4 & Educator logs into the system by using a specific form \\
+        \hline
+        SP5 & Student subscribes to a tournament \\
+        \hline
+        SP6 & Educator creates a tournament then grants other educators to add other battles \\
+        \hline
+        SP7 & Educator adds a challenge to an existing tournament \\
+        \hline
+        SP8 & Student uses the platform to form a team for a battle \\
+        \hline
+        SP9 & Student joins a battle on their own \\
+        \hline
+        SP10 & GitHub Actions informs the platform when students push a new commit \\
+        \hline
+        SP11 & Educator creates a challenge adding textual description, software and settings\\
+        \hline
+        SP12 & Group delivers its solution to the platform \\
+        \hline
+        SP13 & Educator goes through the sources produced by each team to assign their score \\
+        \hline
+        SP14 & Students and educators involved in the battle visualize the current rank evolving\\& during the battle \\
+        \hline
+        SP15 & Students and educators visualize the list of ongoing tournaments and their rank \\
+        \hline
+        SP16 & Educator closes a tournament \\
+        \hline
+        SP17 & Educator defines badges when creating a tournament specifying title and rules \\
+        \hline
+        SP18 & Students and educators visualize other students' profiles with their collected badges\\
+        \hline
+    \end{tabular}
+    \caption{Shared phenomena of the system (world controlled)}
+    \label{tab:goals}
+\end{table}
+\\
+\textbf{Controlled by the machine and observed by the world:}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+        SP19 & Subscribed student receives GitHub repository's link where code kata is contained \\
+    \hline
+        SP20 & Student is notified when the final battle rank becomes available \\
+    \hline
+        SP21 & Subscribed student is notified when the final tournament rank becomes available \\
+    \hline
+    \end{tabular}
+    \caption{Shared phenomena of the system (machine controlled)}
+    \label{tab:goals}
+\end{table}
+
+\subsection{Definitions, acronyms, abbreviations}
+\subsubsection{Definitions}
+\begin{itemize}
+    \item Students: all students that are subscribed on the platform to learn and participate to tournaments. They need a unique email to subscribe
+    \item Educators: all educators that are subscribed on the platform to create tournaments and battles. They need a unique email to subscribe
+    \item Users: all students and educators that are subscribed on the platform
+    \item Kata: exercise in karate where you repeat a form many, many times, making little improvements in each. Code Kata is an attempt to bring this element of practice to software development
+    \item Code kata: exercise created by an educator, composed by a description and software components, including test cases and build automation scripts
+    \item Battle: a code kata battle
+\end{itemize}
+
+\subsubsection{Acronyms}
+\begin{itemize}
+    \item RASD: Requirement Analysis and Specification Document
+    \item DD: Design Document
+    \item CKB: CodeKataBattle
+    \item GH: GitHub
+    \item GHA: GitHub Action
+\end{itemize}
+
+\subsubsection{Abbreviations}
+\begin{itemize}
+    \item G$n$: Goal number $n$
+    \item R$n$: Requirement number $n$
+    \item DS$n$: Domain assumption number $n$
+    \item WP$n$: World phenomena number $n$
+    \item SP$n$: Shared phenomena number $n$
+\end{itemize}
+
+\subsection{Revision history}
+
+\subsection{Reference documents}
+This document is based on:
+\begin{itemize}
+    \item The specification of the RASD and DD assignment given by professors Matteo Rossi, Elisabetta Di Nitto and Matteo Camilli at Politecnico di Milano, academic year 2023/2024
+    \item Slides of Software Engineering 2 course on WeBeep
+\end{itemize}
+
+\subsection{Document structure}
+The document contains six chapters that describe the whole system and its specifications, in order to explain it not just to customers and users but also to developers and programmers that will implement the requirements, to systems and requirements analysts and also to project managers. \\
+The first chapter is an introduction aimed to describe the system and its interaction with the users. The main key of this section is specifying goals, describing the system and what can be done using this platform. \\
+The second chapter contains a more specific description of the system: to show how CKB can be used, some different scenarios are presented, analyzed and explained, allowing to clarify the interaction between users and the system. \\
+The third chapter contains more detailed specifications of the requirements. Here, all the interfaces are presented and explained. After this, there are sections dedicated to functional and performance requirements: use cases diagrams and sequence activity diagrams are here presented to describe functional and non-functional requirements. In the end, this chapter contains sections dedicated to design constraints and system’s attributes such as reliability, availability, security, maintainability, and portability. \\
+The fourth chapter contains a formal analysis with Alloy, here assertions are shown to be meaningful by a series of simulations. \\
+The fifth chapter is a report containing the effort spent by each group member. \\
+The sixth and last chapter contains all the references used in the document.

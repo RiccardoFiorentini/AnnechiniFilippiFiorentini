@@ -1,0 +1,96 @@
+\input{commandsFile}
+\begin{document}
+%TITLE PAGE
+
+\begin{titlepage}
+
+%LOGO
+{\begin{table}[t!]
+\centering
+\begin{tabu} to \textwidth { X[3,c,m]}
+    \includegraphics[scale=0.5]{Images/PolimiLogo} 
+\end{tabu}
+~\\ [2cm]
+\begin{tabu} to \textwidth {X[2,l,m] }
+    \textcolor{Black}{\textbf{\small{CodeKataBattle project - Annechini Alessandro, Filippi Nicole, Fiorentini Riccardo}}}
+\end{tabu}
+\end{table}}~\\ [5cm]
+
+%TITLE 
+
+\begin{flushleft}
+%Replace the text string with your title
+{\textcolor{Black}{\textbf{\Huge{Requirement Analysis and Specification
+        Document}}}} \\ [1cm]
+\end{flushleft}
+
+~\\[2cm]
+
+%Define deliverable specific info
+%Replace cell contents where needed
+\begin{table}[h!]
+\begin{tabu} to \textwidth { X[0.25,r,p] X[0.7,l,p] }
+\hline
+
+\textbf{Deliverable:} & RASD\\
+\textbf{Title:} & Requirement Analysis and Specification Document \\
+\textbf{Authors:} & Annechini Alessandro, Filippi Nicole, Fiorentini Riccardo\\
+\textbf{Version:} & 1.0 \\ 
+\textbf{Date:} & 20-December-2023 \\
+\textbf{Download page:} & https://github.com/RiccardoFiorentini/AnnechiniFilippiFiorentini \\
+\hline
+\end{tabu}
+\end{table}
+
+\end{titlepage}
+
+
+
+\setcounter{page}{2}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\newpage
+%\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+\newpage
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Introduction}}}
+\label{sect:introduction}
+\input{Files/Introduction}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Overall Description}}}
+\label{sect:overview}
+\input{Files/Overall_Description}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Specific Requirements}}}
+\label{sect:requirements}
+\input{Files/Requirements}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Formal Analysis Using Alloy}}}
+\label{sect:alloy}
+\input{Files/Alloy}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Effort Spent}}}
+\label{sect:effort}
+\input{Files/Effort}
+
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain}
+\bibliography{main}
+%------------------------------------------------------------------------------------------------------------------------------------------------
+
+\end{document}

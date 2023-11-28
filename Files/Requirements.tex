@@ -1,0 +1,45 @@
+\subsection{External interfaces}
+\subsubsection{User interfaces}
+\subsubsection{Hardware interfaces}
+\subsubsection{Software interfaces}
+
+\subsection{Functional Requirements}
+\subsubsection{Use cases diagrams}
+\subsubsection{Sequence diagrams}
+\subsubsection{Requirements mapping}
+\comment{Da fare alla fine}
+
+\subsection{Performance requirements}
+\begin{enumerate}
+  \item \textbf{Response Time:} \\
+  To ensure timely responsiveness for user interactions the platform should respond to user actions (e.g., loading pages, submitting forms) within a maximum of two seconds under normal load conditions.
+  \item \textbf{Scalability:} \\
+  To ensure the platform can handle an increasing number of users and data the platform should support concurrent access by at least 1000 users without significant degradation in performance, for up to 1000 battles simultaneously.
+  \item \textbf{GitHub Integration:} \\
+  GitHub repository creation, including code kata and automation setup, should take no longer than two minutes, also automated workflow triggers from GHA should result in platform updates within 1 minute of code submission, otherwise some students’ submission may be lost.
+  \item \textbf{Automated Assessment and Consolidation Stage:} \\
+  To ensure fast evaluation of code submissions, automated assessments (including code analysis and test execution) should complete within two minutes for a battle. Also, the platform should handle simultaneous automated assessments from multiple battles without queuing delays.
+  \item \textbf{Notification System:} \\
+  Notifications about battle and tournament updates need to be sent to every interested user in at most one minute.
+  \item \textbf{Badges and Gamification:} \\
+  To provide a continuous experience for badge assignment and visualization, they need to be assigned right after the end of each tournament and to the correct students. Also, their visualization on users’ profile should load instantaneously.
+  \item \textbf{Security:} \\
+  To ensure secure data handling and prevent unauthorized access user authentication and authorization processes should happen rapidly and the platform should do regular security inspections to identify and address potential vulnerabilities.
+  \item \textbf{Data Storage and Retrieval:} \\
+  To optimize data storage and retrieval processes, database queries for common operations should be fully optimized. Frequent backups are done to prevent data losses.
+  \item \textbf{Reliability:} \\
+  To ensure consistent and reliable performance, the platform should achieve 99.9\% uptime.
+\end{enumerate}
+These are criteria that CKB aims to achieve. Rigorous testing and continuous monitoring will be essential to meet and maintain these standards throughout the system’s lifecycle.
+
+\subsection{Design constraints}
+\subsubsection{Standard compliance}
+\subsubsection{Hardware limitations}
+\subsubsection{Any other constraint}
+
+\subsection{Software system attributes}
+\subsubsection{Reliability}
+\subsubsection{Availability}
+\subsubsection{Security}
+\subsubsection{Maintainability}
+\subsubsection{Portability}

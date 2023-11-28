@@ -1,0 +1,190 @@
+\subsection{Signatures}
+In this chapter we report a formal analysis of the system performed with the specification language Alloy, along with the output of Alloy Analyzer, in order to check the correctness and coherence of the logical components of the system.\\
+In this section, we list the signatures used in the formal analysis. Note that the description of the various components includes only the elements that are at interest in the formal analysis.
+
+\begin{minted}{alloy}
+open util/integer
+
+sig Email,Name {}
+
+sig Badge{
+    tournament: one Tournament
+}
+
+sig Student{
+    name: one Name,
+    email: one Email,
+    //The set of earned badges
+    var badges: set Badge
+}
+
+sig Group{
+    students: some Student
+}
+
+sig Educator{
+    name: one Name,
+    email: one Email
+}
+
+enum TournamentStatus{
+    //The tournament has not been created yet
+    NotCreatedYet,
+    //The tournament has been created and it accepts subscriptions
+    Subscription,
+    //The tournament has started, students can solve battles within the tournament
+    Started,
+    //The tournament has been closed
+    Closed
+}
+
+sig Tournament{
+    creator: one Educator,
+    var status: one TournamentStatus,
+    //The set of students subscripted to the tournament
+    var students: set Student
+}
+
+sig Battle{
+    creator: one Educator,
+    tournament: one Tournament,
+    //Groups partecipating to the battle
+    var groups: set Group
+}
+\end{minted}
+
+\subsection{Time-independent facts}
+Alloy facts allow the model to behave coherently with the real world. Facts can depend or not on the time evolution of the system: in this section, we report the static, time-independent facts.
+
+\begin{minted}{alloy}
+//All Emails correspond to at least a Student or an Educator
+fact NoUnusedEmails{
+    no e:Email | (no s:Student | s.email = e) and (no ed:Educator | ed.email = e)
+}
+//All Names correspond to at least a Student or an Educator
+fact NoUnusedNames{
+    no n:Name | (no s:Student | s.name = n) and (no ed:Educator | ed.name = n)
+}
+
+//All the students have unique Emails
+fact UniqueEmailForStudents{
+    no disj s1,s2:Student | s1.email = s2.email
+}
+//All the educators have unique Emails
+fact UniqueEmailForEducators{
+    no disj e1,e2:Educator | e1.email = e2.email
+}
+\end{minted}
+
+\subsection{Time-dependent facts}
+In this section we report all the facts that depend on the time evolution of the system. In particular, all the parameters listed with the keyword \textbf{var} can change over time, thus needing a time-dependent analysis.
+
+\subsubsection{Tournaments}
+
+\begin{minted}{alloy}
+//Every Tournament is initially not created
+fact BeginningNotCreatedYet{
+    all t:Tournament | always(
+    (t.status = NotCreatedYet implies historically t.status = NotCreatedYet) and
+    (t.status != NotCreatedYet implies once t.status = NotCreatedYet) )
+}
+
+//Transition predicates
+pred NotCreatedYetToSubscription[t:Tournament]{
+    t.status = NotCreatedYet
+    t.status' = Subscription
+}
+pred SubscriptionToStarted[t:Tournament]{
+    t.status = Subscription
+    t.status' = Started
+}
+pred StartedToClosed[t:Tournament]{
+    t.status = Started
+    t.status' = Closed
+}
+
+//All the changes in the tournament status follow the defined transitions
+fact TransitionsFact{
+    all t:Tournament | always( 
+    (t.status = NotCreatedYet implies t.status'=t.status or 
+    NotCreatedYetToSubscription[t]) and
+    (t.status = Subscription implies t.status'=t.status or SubscriptionToStarted[t]) and
+    (t.status = Started implies t.status'=t.status or StartedToClosed[t]) and
+    (t.status = Closed implies t.status'=t.status))
+}
+
+//All the tournaments eventally close
+fact TournamentsClose{
+    all t: Tournament | eventually t.status = Closed
+}
+
+//The students can subscribe only in the Subscription phase
+fact SubscriptionsInTournament{
+    all t:Tournament | always(
+    (t.status = NotCreatedYet implies #t.students = 0 ) and
+    (t.students' != t.students implies t.status' = Subscription))
+}
+\end{minted}
+
+\subsubsection{Groups and Battles}
+
+\begin{minted}{alloy}
+//All the groups partecipate to a battle
+fact NoUnusedGroups{
+    all g:Group | eventually one b:Battle | g in b.groups
+}
+
+//Groups are created only for individual battles
+fact NoRepeatedGroups{
+    always( no disj b1,b2:Battle | #(b1.groups & b2.groups)>0 )
+}
+
+//Groups can partecipate only if the tournament has started
+fact GroupsBattleChangesHappenAfterStart{
+    all b:Battle | always(
+    (b.tournament.status = NotCreatedYet implies #b.groups = 0)
+    and
+    (b.groups' != b.groups implies b.tournament.status' = Started))
+}
+
+//Students can partecipate only in one group for each battle
+fact NoStudentsTowGroupsSameBattle{
+    all b:Battle | always(
+    no disj g1,g2:Group | g1 in b.groups and g2 in b.groups
+    and #(g1.students & g2.students)>0)
+}
+
+//Groups can partecipate only if all their components are subscripted to the tournament
+fact SubscriptionToPartecipate{
+    all b:Battle | always(all g:Group | g in b.groups implies
+    (all s:Student | s in g.students implies s in b.tournament.students))
+}
+
+//Educators cannot partecipate as Students to their battles
+fact NoEducatorsRegisteredAndCreate{
+    always(no b:Battle | b.creator.email in b.groups.students.email)
+}
+\end{minted}
+
+\subsubsection{Badges}
+
+\begin{minted}{alloy}
+//The set of badges of each student can change
+pred ChangedBadgesSet[s:Student,b:Badge]{
+    b not in s.badges
+    s.badges' = s.badges + b
+}
+
+//The set of badges increments only
+fact NoSubtractedBadges{
+    all s:Student | always( all b:Badge |
+    (b in s.badges implies b in s.badges'))
+}
+
+//Badges can be earned only when a tournament they are subscribed to closes
+fact BadgesWhenTournamentCloses{
+    all s:Student | once #s.badges = 0 and always(
+    all b:Badge | ChangedBadgesSet[s,b] implies 
+    (s in b.tournament.students and StartedToClosed[b.tournament]))
+}
+\end{minted}

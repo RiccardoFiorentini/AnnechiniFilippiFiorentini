@@ -33,7 +33,7 @@ BattleClosed -> [*]
 @startuml
 [*] -> RealTimeUpdate
 RealTimeUpdate -> ConsolidationStage : submission deadline expired
-ConsolidationStage -> FinalScore : educator ends the manual evaluation
-FinalScore -> [*]
+RealTimeUpdate -> FinalScore : submission deadline expired
+ConsolidationStage --> FinalScore : educator ends the manual evaluation
+FinalScore --> [*]
 @enduml
-

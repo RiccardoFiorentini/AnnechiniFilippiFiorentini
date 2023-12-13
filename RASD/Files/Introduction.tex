@@ -1,5 +1,5 @@
 \subsection{Purpose}
-The objective of this Requirements Analysis and Specification Document (RASD) is to delineate the foundational framework for the proposed CodeKataBattle platform (CKB). This comprehensive document will thoroughly detail the functional and non-functional requisites of CKB while outlining system's constraints and boundaries. Primarily, this RASD serves as a directive for the development team tasked with implementing the specified requirements. Simultaneously, it acts as a contractual foundation for stakeholders and end-users, ensuring clarity and alignment between expectations and system capabilities. As such, precision in terminology is important, with explicit definitions provided to enhance mutual understanding. \\
+The objective of this Requirements Analysis and Specification Document (RASD) is to delineate the foundational framework for the proposed CodeKataBattle platform (CKB). This comprehensive document will thoroughly detail the functional and non-functional requisites of CKB while outlining the system's constraints and boundaries. Primarily, this RASD serves as a directive for the development team tasked with implementing the specified requirements. Simultaneously, it acts as a contractual foundation for stakeholders and end-users, ensuring clarity and alignment between expectations and system capabilities. As such, precision in terminology is important, with explicit definitions provided to enhance mutual understanding. \\
 The CKB platform introduces a revolutionary approach to enhancing students' software development proficiency through collaborative training in code kata exercises. Oriented towards creating a competitive yet supportive learning environment. Educators are enabled to construct engaging challenges for students from the platform. These challenges involve teams of students competing to demonstrate and refine their coding skills.
 
 \subsubsection{Goals}
@@ -31,20 +31,24 @@ Here are the goals to achieve by implementing the CodeKataBattle (CKB) software:
 In the fast-evolving landscape of today's technological era, the demand for adept software developers continues to rise. As the significance of collaborative learning and practical skill development becomes increasingly apparent, educational platforms are crucial in shaping the next generation of software engineers. \\
 CodeKataBattle (CKB) emerges as an innovative solution, providing a dynamic platform to practice their software development skills collaboratively. In a society where real-world coding challenges and industry-relevant practices are fundamental, CKB bridges the gap between theoretical knowledge and practical application. CKB not only proves instrumental in individual skill enhancement but also promotes a sense of healthy competition. This platform aligns with the contemporary need for hands-on, team-oriented learning experiences.
 \\ CKB serves as a vital tool in preparing students for the challenges of today's technology-driven society, where adaptability and collaborative problem-solving are key components of success.
+
 \subsubsection{Description of the system}
-CKB is a project aimed to help people to learn how to code but also to improve their software development skills, offering a dynamic and interactive environment for users to engage in collaborative learning. It supports two types of users:
+CKB is a project aimed at helping people learn how to code but also to improve their software development skills, offering a dynamic and interactive environment for users to engage in collaborative learning. It supports two types of users:
 \begin{itemize}
   \item Students
   \item Educators
 \end{itemize}
 The platform facilitates the creation and management of code kata battles, where students can compete against each other to solve programming exercises in lots of different languages of choice, 
-either by themselves or joining a team.  \\
-Educators, creating code kata battles, challenge teams of students to compete against each other with diverse coding scenarios, allowing students of proving and improving not just their coding abilities but also their collaboration abilities by working in teams. \\
+either by themselves or by joining a team.  \\
+Educators, creating code kata battles, challenge teams of students to compete against each other with diverse coding scenarios. Students can prove and improve not just their coding abilities but also their collaboration abilities by working in teams. \\
 Each battle follows a structured timeline from registration to final submission, with GitHub integration for code versioning and automated assessment.
 The system also provides a test-first approach and automated evaluation of functional aspects, timeliness, and source code quality. \\
-The platform extends beyond individual battles: educators can also create tournaments, where different educators can add their challenges. Students can subscribe to tournaments and solve the contained battles. The platform will then provide for each tournament a rank that reflects students' cumulative performance. \\
-The scope includes features for educators to create, configure, and close tournaments, and for students to visualize tournament's rank. \\
+The platform extends beyond individual battles: educators can also create tournaments where different educators can add challenges. Students can subscribe to tournaments and solve the contained battles. The platform will then provide for each tournament a rank that reflects students' cumulative performance. \\
+The scope includes features for educators to create, configure, and close tournaments, and for students to visualize the tournament's rank. \\
 In addition, the system introduces badges that allow educators to define and award achievements based on specific criteria and students to improve their competitiveness, since gained badges are visible to all students and educators. \\
+
+\newpage
+
 \subsubsection{World phenomena}
 \begin{table}[h]
     \centering
@@ -65,18 +69,16 @@ In addition, the system introduces badges that allow educators to define and awa
     \label{tab:goals}
 \end{table}
 
-\newpage
-
 \subsubsection{Shared phenomena}
-Shared phenomena are divided in:\\
+Shared phenomena are divided into:\\
 \textbf{Controlled by the world and observed by the machine:}
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|l|}
         \hline
-        SP1 & Student creates an account into the system by using a specific form \\
+        SP1 & Student creates an account in the system by using a specific form \\
         \hline
-        SP2 & Educator creates an account into the system by using a specific form \\
+        SP2 & Educator creates an account in the system by using a specific form \\
         \hline
         SP3 & Student logs into the system by using a specific form \\
         \hline
@@ -84,7 +86,7 @@ Shared phenomena are divided in:\\
         \hline
         SP5 & Student subscribes to a tournament \\
         \hline
-        SP6 & Educator creates a tournament then grants other educators to add other battles \\
+        SP6 & Educator creates a tournament and then grants other educators to add other battles \\
         \hline
         SP7 & Educator adds a challenge to an existing tournament \\
         \hline
@@ -94,7 +96,7 @@ Shared phenomena are divided in:\\
         \hline
         SP10 & GitHub Actions informs the platform when students push a new commit \\
         \hline
-        SP11 & Educator creates a challenge adding textual description, software and settings\\
+        SP11 & Educator creates a challenge by adding textual description, software, and settings\\
         \hline
         SP12 & Group delivers its solution to the platform \\
         \hline
@@ -134,11 +136,11 @@ Shared phenomena are divided in:\\
 \subsection{Definitions, acronyms, abbreviations}
 \subsubsection{Definitions}
 \begin{itemize}
-    \item Students: all students that are subscribed on the platform to learn and participate to tournaments. They need a unique email to subscribe
-    \item Educators: all educators that are subscribed on the platform to create tournaments and battles. They need a unique email to subscribe
-    \item Users: all students and educators that are subscribed on the platform
-    \item Kata: exercise in karate where you repeat a form many, many times, making little improvements in each. Code Kata is an attempt to bring this element of practice to software development
-    \item Code kata: exercise created by an educator, composed by a description and software components, including test cases and build automation scripts
+    \item Students: all students who are subscribed to the platform to learn and participate in tournaments. They need a unique email to subscribe
+    \item Educators: all educators who are subscribed to the platform to create tournaments and battles. They need a unique email to subscribe
+    \item Users: all students and educators who are subscribed to the platform
+    \item Kata: an exercise in karate where you repeat a form many, many times, making little improvements in each. Code Kata is an attempt to bring this element of practice to software development
+    \item Code kata: exercise created by an educator, composed of a description and software components, including test cases and building automation scripts
     \item Battle: a code kata battle
     \item Platform: the CodeKataBattle platform, i.e. a system that provides a set of tools, features, and services
 \end{itemize}
@@ -150,18 +152,25 @@ Shared phenomena are divided in:\\
     \item CKB: CodeKataBattle
     \item GH: GitHub
     \item GHA: GitHub Action
+    \item DBMS: Database Management System
+    \item UI: User Interface
 \end{itemize}
 
 \subsubsection{Abbreviations}
 \begin{itemize}
     \item G$n$: Goal number $n$
     \item R$n$: Requirement number $n$
-    \item DS$n$: Domain assumption number $n$
+    \item D$n$: Domain assumption number $n$
     \item WP$n$: World phenomena number $n$
     \item SP$n$: Shared phenomena number $n$
+    \item DP$n$: Dependency number $n$
+    \item UC$n$: Use case number $n$
 \end{itemize}
 
 \subsection{Revision history}
+\begin{itemize}
+    \item Version 1.0 - 22/12/2023
+\end{itemize}
 
 \subsection{Reference documents}
 This document is based on:
@@ -171,10 +180,11 @@ This document is based on:
 \end{itemize}
 
 \subsection{Document structure}
-The document contains six chapters that describe the whole system and its specifications, in order to explain it not just to customers and users but also to developers and programmers that will implement the requirements, to systems and requirements analysts and also to project managers. \\
-The first chapter is an introduction aimed to describe the system and its interaction with the users. The main key of this section is specifying goals, describing the system and what can be done using this platform. \\
-The second chapter contains a more specific description of the system: to show how CKB can be used, some different scenarios are presented, analyzed and explained, allowing to clarify the interaction between users and the system. \\
-The third chapter contains more detailed specifications of the requirements. Here, all the interfaces are presented and explained. After this, there are sections dedicated to functional and performance requirements: use cases diagrams and sequence activity diagrams are here presented to describe functional and non-functional requirements. In the end, this chapter contains sections dedicated to design constraints and system’s attributes such as reliability, availability, security, maintainability, and portability. \\
+The document contains six chapters that describe the whole system and its specifications, to explain it not just to customers and users but also to developers and programmers who will implement the requirements, to systems and requirements analysts, and also to project managers. \\
+The first chapter is an introduction aimed to describe the system and its interaction with the users. The main key of this section is specifying goals, describing the system, and what can be done using this platform. \\
+The second chapter contains a more specific description of the system: to show how CKB can be used, some different scenarios are presented, analyzed, and explained, clarifying the interaction between users and the system. \\
+The third chapter contains more detailed specifications of the requirements. Here, all the interfaces are presented and explained. After this, there are sections dedicated to functional and performance requirements: use case diagrams and sequence activity diagrams
+are presented to describe functional and non-functional requirements. In the end, this chapter contains sections dedicated to design constraints and the system’s attributes such as reliability, availability, security, maintainability, and portability. \\
 The fourth chapter contains a formal analysis with Alloy, here assertions are shown to be meaningful by a series of simulations. \\
 The fifth chapter is a report containing the effort spent by each group member. \\
 The sixth and last chapter contains all the references used in the document.

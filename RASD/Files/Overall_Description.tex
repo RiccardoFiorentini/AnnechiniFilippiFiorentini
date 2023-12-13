@@ -15,7 +15,7 @@
 
    \item \textbf{Creating a Code Kata Battle:} \\
 Sophia, to contribute to her colleague Liam's programming tournament, takes the initiative to create a new Code Kata Battle within the existing tournament. Liam has granted her the authorization to add Code Kata Battles to this specific tournament.
-Sophia begins by logging into the CKB platform (with her educator account) and navigating to Liam's tournament section. Here, she uploads the challenge details, composing a descriptive introduction to the Code Kata and including the necessary software project files along with building automation scripts to facilitate a seamless development and evaluation process. Moving forward, Sophia configures the battle parameters, specifying the minimum and maximum number of students permitted per group. She sets a registration deadline, indicating when students should form or join teams for the battle, and a final submission deadline. Additionally, she customizes scoring configurations to tailor the evaluation process for this specific challenge.
+Sophia begins by logging into the CKB platform (with her educator account) and navigating to the battles' section. Here, she uploads the challenge details, composing a descriptive introduction to the Code Kata and including the necessary software project files along with building automation scripts to facilitate a seamless development and evaluation process. Moving forward, Sophia configures the battle parameters, specifying the minimum and maximum number of students permitted per group. She sets a registration deadline, indicating when students should form or join teams for the battle, and a final submission deadline. Additionally, she customizes scoring configurations to tailor the evaluation process for this specific challenge.
 Upon successfully creating the Code Kata Battle, the CKB platform notifies all subscribed students within Liam's tournament. Students receive notifications about the newly introduced challenge, including essential details such as registration and submission deadlines.
  
 %\begin{itemize}
@@ -25,13 +25,11 @@ Upon successfully creating the Code Kata Battle, the CKB platform notifies all s
 %           \item CKB platform notifies all subscribed students about the new battle.
 %      \end{itemize}
 
-    \item \textbf{Student partecipates to a Battle:} \\
-    Olivia, willing to play a C++ coding challenge with her coding club friends, initiates her participation by logging into the CKB platform. Within the platform, she navigates to the desired tournament and selects the specific battle she wishes to join. Once Olivia joins the battle, she enters the subscription phase.
+    \item \textbf{Student Participates to a Battle:} \\
+    Olivia, willing to play a C\texttt{++} coding challenge with her coding club friends, initiates her participation by logging into the CKB platform. Within the platform, she navigates to the desired tournament and selects the specific battle she wishes to join. Once Olivia joins the battle, she enters the subscription phase.
 During the subscription phase, Olivia invites her friends to form a team, ensuring to respect the specified minimum and maximum number of members for that particular battle. Her friends, upon receiving the invitation, log into the CKB platform and promptly accept her invitation to become members of the team.
 To submit their code, Olivia and her teammates fork the designated GitHub repository, and they set up an automated workflow using GitHub Actions to streamline the continuous integration process. The team can submit their code by committing changes to the main branch.
 The CKB platform is triggered on each push, pulling the latest sources and executing the necessary tests to calculate and promptly update the team's score. This real-time scoring mechanism ensures that students and educators have instantaneous access to the latest results, fostering an environment of transparency and healthy competition.
-
-\comment{TEAM NON ACCETTATO? ISCRIZIONI?}
     
 %        \begin{itemize}
  %           \item Students log in to the CKB platform;
@@ -43,8 +41,8 @@ The CKB platform is triggered on each push, pulling the latest sources and execu
             %\item Scores are updated in real-time on the platform, visible to both students and educators.
 %        \end{itemize}
 
-    \item \textbf{Educator manually evaluates Students' solutions:} \\
-    As the submission deadline for Jacob's battle approaches the consolidation phase begins. Once the deadline expires, the CKB platform automatically evaluates essential components such as functional aspects, timeliness, and source code quality. This automated evaluation ensures a comprehensive and standardized assessment of each participating group's performance. In addition to the automated evaluation, Jacob, as the organizer, takes an extra step to guarantee the fairness of the competition. He personally reviews and evaluates the submissions from all participating groups, applying his expertise to acknowledge exceptional efforts and contributions. The final scores are finally assigned, marking the conclusion of the consolidation phase. At this point, all scores become visible to the users. 
+    \item \textbf{Educator Manually Evaluates Students' Solutions:} \\
+    As the submission deadline for Jacob's battle approaches, the consolidation phase begins. Once the deadline expires, the CKB platform automatically evaluates essential components such as functional aspects, timeliness, and source code quality. This automated evaluation ensures a comprehensive and standardized assessment of each participating group's performance. In addition to the automated evaluation, Jacob, as the organizer, takes an extra step to guarantee the fairness of the competition. He personally reviews and evaluates the submissions from all participating groups, applying his expertise to acknowledge exceptional efforts and contributions. The final scores are finally assigned, marking the conclusion of the consolidation phase. At this point, all scores become visible to the users. 
     
 %        \begin{itemize}
 %            \item After the submission deadline, there is a consolidation stage;
@@ -76,14 +74,17 @@ The badges, complete with their titles and associated rules, are displayed for a
 \end{enumerate}
 
 \subsubsection{Domain class diagram}
-\comment{Descrizione del class diagram}
+
+In Figure \ref{fig:ClassDiagram}, the Domain Class Diagram of the system is represented to illustrate the most relevant entities of the system along with the relations between them. There are two types of Users in the system: Students and Educators. Students can join Tournaments and Battles, either cooperating with other students by forming a Group or playing on their own (situation represented by a Group with one element). Groups can perform multiple submissions in the context of a Battle, all of which get instantaneously. Educators can create Tournaments and Battles, choosing whether to manually evaluate the final submissions or not. When creating a Battle, Educators must describe the Exercise that the students will try to solve, along with all the required Software Components for automated building and testing. Finally, in the context of a Tournament, Badges can be created and assigned to deserving students once the Tournament has closed. Note that this illustration does not allow for a dynamic view of the system, while in the rest of the document, time-dependent aspects will be presented, starting from the state evolution of the main components of the system.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{Images/ClassDiagramRASD.png}
+  \includegraphics[width=1\textwidth]{Images/DomainClassDiagram.png}
   \caption{Domain class diagram}
   \label{fig:ClassDiagram}
 \end{figure}
+
+\newpage
 
 \subsubsection{Statecharts}
 
@@ -96,40 +97,40 @@ The CKB platform involves several key states and transitions to facilitate the s
     \item \textbf{Tournament Lifecycle:} \\
     Upon the creation of a tournament, the Registration state commences, enabling students to submit their applications. Upon the conclusion of the registration phase, the tournament seamlessly transitions to the Started state, officially allowing users to subscribe to the battles. Upon reaching its conclusion, the educator who initiated the tournament holds the authority to close it, guiding it into the Closed state. This state transition mechanism ensures a structured progression throughout the tournament lifecycle.
     
-    \begin{figure}[h!]
+    \begin{figure}[H]
           \centering
-          \includegraphics[width=1\textwidth]{Images/TournamentLifecycle.png}
+          \includegraphics[width=1\textwidth]{Images/SC_TournamentLifecycle.png}
           \caption{Tournament Lifecycle}
           \label{fig:TournamentLifecycle}
     \end{figure}
 
     \item \textbf{Code Kata Battle Lifecycle:} \\
-    Upon the creation of a code kata battle, it assumes the RegistrationOpen state, enabling students to participate by entering the battle and forming teams. Following the expiration of the registration deadline, the state seamlessly transitions to Started, marking the commencement of the game.
+    Upon the creation of a code kata battle, it assumes the Registration state, enabling students to participate by entering the battle and forming teams. Following the expiration of the registration deadline, the state seamlessly transitions to Started, marking the commencement of the game.
 
-Upon reaching its conclusion, the battle undergoes a state transition. If necessary, and at the discretion of the educator, it can move to the Consolidation state for a manual review of the code. Alternatively, if manual review is not required, the battle transitions directly to the Closed state, revealing all the scores and outcomes.
+    After reaching its conclusion, the battle undergoes a state transition. If necessary, and at the educator's discretion, it can move to the Consolidation state for a manual review of the code. Alternatively, if manual review is not required, the battle transitions directly to the Closed state, revealing all the scores and outcomes.
 
-        \begin{figure}[h!]
+        \begin{figure}[H]
               \centering
-              \includegraphics[width=1\textwidth]{Images/CKBLifecycle.png}
+              \includegraphics[width=1\textwidth]{Images/SC_CKBLifecycle.png}
               \caption{Code kata battle lifecycle}
               \label{fig:CKBLifecycle}
         \end{figure}
 
     \item \textbf{Student Team Formation:} \\
-    Upon entering a battle, a student has the capability to create a team by extending invitations to other students via email. The group initially resides in the Pending state until the commencement of the battle. At this point, if the team aligns with the specified requirements of the battle (the required number of students), the team's state transitions to Accepted. Contrarily, if the team falls short of meeting the stipulated requirements, the state shifts to Rejected.
+    Upon entering a battle, a student can create a team by extending invitations to other students via email. The group initially resides in the Pending state until the commencement of the battle. At this point, if the team aligns with the specified requirements of the battle (the required number of students), the team's state transitions to Accepted. Contrarily, if the team falls short of meeting the stipulated requirements, the state shifts to Rejected.
     
-        \begin{figure}[h!]
+        \begin{figure}[H]
               \centering
-              \includegraphics[width=0.7\textwidth]{Images/TeamFormation.png}
+              \includegraphics[width=0.7\textwidth]{Images/SC_TeamFormation.png}
               \caption{Students team formation}
               \label{fig:CKBLifecycle}
         \end{figure}
 
     \item \textbf{GitHub Integration:} \\
     Following the creation of the repository by the educator, denoting the RepositoryCreated state, students are required to fork the repository. Subsequently, they must set up the automated workflow using GitHub Actions, marking the transition to the WorkflowEstablished state. As the battle concludes, the state progresses to BattleClosed, meaning that no further pushes to the repository are permitted.
-        \begin{figure}[h!]
+        \begin{figure}[H]
               \centering
-              \includegraphics[width=1\textwidth]{Images/GitHubConfiguration.png}
+              \includegraphics[width=1\textwidth]{Images/SC_GitHubConfiguration.png}
               \caption{GitHub Integration}
               \label{fig:CKBLifecycle}
         \end{figure}
@@ -137,9 +138,9 @@ Upon reaching its conclusion, the battle undergoes a state transition. If necess
 
     \item \textbf{Battle Score Update:} \\
     At the onset of a battle and throughout its active phase (denoted by the Started state for the code kata battle), the battle score update operates in the RealTimeUpdate state. This signifies that with every push made by each student, the scores undergo real-time updates. Upon the expiration of the submission deadline, the state transitions to the ConsolidationStage. In this phase, the educator has the option to perform a manual evaluation of the students if desired. Following the manual evaluation or, if no manual evaluation is conducted, the state moves to the FinalScore, revealing the conclusive rank of the battle. This systematic flow ensures a seamless and structured progression throughout the different stages of the battle.
-        \begin{figure}[h!]
+        \begin{figure}[H]
               \centering
-              \includegraphics[width=1\textwidth]{Images/BattleScoreUpdate.png}
+              \includegraphics[width=1\textwidth]{Images/SC_BattleScoreUpdate.png}
               \caption{Battle score update}
               \label{fig:CKBLifecycle}
         \end{figure}
@@ -161,13 +162,13 @@ Upon reaching its conclusion, the battle undergoes a state transition. If necess
     Following the registration deadline, the platform generates a dedicated GitHub repository for each participating team, a repository that students are required to fork. Additionally, students must configure automated workflows utilizing GitHub Actions to facilitate continuous integration and evaluation. This setup ensures that with every commit made to the main branch, the CKB platform is triggered, updating scores in real time. This workflow guarantees efficient collaboration and real-time feedback for participating teams.
 
     \item \textbf{Scoring evaluation} \\
-    The platform conducts automated evaluations encompassing functional aspects, timeliness, and source code quality. These evaluations result in real-time updates to scores, providing instant visibility for students and educators on the platform. Moreover, educators can perform manual evaluations and assign personal scores if necessary, contributing to a comprehensive and dynamic assessment process.
+    The platform conducts automated evaluations containing functional aspects, timeliness, and source code quality. These evaluations result in real-time updates to scores, providing instant visibility for students and educators on the platform. Moreover, educators can perform manual evaluations and assign personal scores if necessary, contributing to a comprehensive and dynamic assessment process.
     
     \item \textbf{Gamification Badges} \\
     Educators can craft gamification badges tailored to specific tournaments, with each badge automatically assigned to students based on predefined rules and their performance. The earned badges become prominently displayed in a user's profile, offering a visual representation of their achievements. Both students and educators can access and view these badges, fostering a sense of recognition and accomplishment within the CKB platform.    
 
     \item \textbf{Notification System} \\
-    The CKB platform ensures communication by automatically notifying students and educators of new tournaments, battles, and tournament closures. These notifications are comprehensive, offering essential information such as important deadlines and updates. This proactive approach improves user engagement and keeps participants well informed throughout their CodeKataBattle experience.
+    The CKB platform ensures communication by automatically notifying students and educators of new tournaments, battles, and tournament closures. These notifications are comprehensive, offering essential information such as important deadlines and updates. This proactive approach improves user engagement and keeps participants well-informed throughout their CodeKataBattle experience.
     
 \end{enumerate}
 
@@ -183,6 +184,8 @@ Upon reaching its conclusion, the battle undergoes a state transition. If necess
         
 \end{enumerate}
 
+\newpage
+
 \subsection {Assumptions, dependencies and constraints}
 
 \subsubsection{Assumptions}
@@ -192,7 +195,7 @@ The following assumptions are made to clarify the domain in which the software r
     \centering
     \begin{tabular}{|l|l|}
     \hline
-        D1 & The users (educators and students) have basic proficiency in using web-based platforms \\
+        D1 & Users (educators and students) have basic proficiency in using web-based platforms \\
         & and are familiar with version control systems, such as Git\\
     \hline
         D2 & Educators have the necessary knowledge to create meaningful code kata battles,\\ 
@@ -202,11 +205,9 @@ The following assumptions are made to clarify the domain in which the software r
     \hline
         D4 & Notification must arrive to connected users in one minute \\
     \hline
-        D5 & GitHub Account Requirement: students are required to have a GitHub account \\
-        & for participation, and the platform assumes that students have the necessary permissions 
-        \\ & to fork repositories \\
+        D5 & Students are required to have a GitHub account for participation, and the platform \\ & assumes that students have the necessary permissions to fork repositories \\
     \hline
-        D6 & E-mail required \\
+        D6 & Users dispone of an e-mail address \\
     \hline
         D7 & Users need a reliable internet connection to interact with the CKB platform\\
     \hline
@@ -215,9 +216,8 @@ The following assumptions are made to clarify the domain in which the software r
     \label{tab:assumptions}
 \end{table}
 
-
 \subsubsection{Dependencies}
-In the previous sections, a number of dependencies from third-party software regarding core features of the systems has been identified:
+In the previous sections, several dependencies from third-party software regarding core features of the system have been identified:
 
 \begin{table}[h]
     \centering
@@ -229,7 +229,7 @@ In the previous sections, a number of dependencies from third-party software reg
         DP2 & To allow static code analysis external API could be required\\
     \hline
     \end{tabular}
-    \caption{Assumptions}
+    \caption{Dependencies}
     \label{tab:assumptions}
 \end{table}
 

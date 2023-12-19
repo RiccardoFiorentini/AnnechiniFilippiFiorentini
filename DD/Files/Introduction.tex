@@ -1,0 +1,72 @@
+\subsection{Purpose}
+This Design Document (DD) is the continuation of the Requirements Analysis and Specification Document (RASD). The purpose of this Design Document is to translate the conceptual framework defined in the RASD into a physical, robust system architecture. It serves as a guide for software developers, system architects, and stakeholders involved in the construction and evolution of the CKB platform. By examining the system's internal structure, modules, and data flow, this document elucidates the technical details necessary for turning the features into functional components. \\
+This DD not only elaborates the architectural choices made during the design phase but also explains the reasoning behind these decisions. It addresses how the system will handle key functionalities, ensuring scalability, maintainability, and security. In addition, the document explores the specifics of data storage, processing, and the integration of external tools to provide a general view of the technical basis. \\
+In few words, the Design Document acts as a bridge between the conceptualization of the CodeKataBattle platform and its effective realization. Developers and technical stakeholders can use this document to comprehend the system's architecture, enabling them to craft a software that aligns with the defined requirements.
+
+
+\subsection{Scope}
+The CodeKataBattle (CKB) platform is a software that redefines collaborative coding experiences for students and educators. CKB offers coding competitions termed "Code Kata Battles," providing skill development and promoting a healthy competition among student teams. \\
+This platform's principal objective is to facilitate collaborative learning in software development. Educators have the capability to craft tournaments in which battles are added by that tournament's creator and one or more other educators, whose permission needs to be granted. Students subscribe to tournament to join contained battles, they can do that in teams or by themselves. Code Kata Battles are real-time coding challenges constituted by a software project that includes also test cases and build automation scripts, they also have a registration deadline, a submission deadline, a description and some constraints about participating teams. \\
+CKB real-time collaboration feature enables students to collectively address coding exercises, but to do this all users need a GitHub account to work on the project. For every battle a GitHub repository is created by the platform, and the link is distributed to all subscribed teams, students can work on the project pushing a new commit into the main branch of battle’s repository, and GitHub Action immediately informs the CKB platform through proper API calls. The automated evaluation mechanisms provided by the system, evaluate factors like functional correctness, timeliness, and code quality, providing instant feedback to participants, but in addition to that after the battles’ submission deadline educators can manually evaluate every team’s work, ensuring a comprehensive valuation of students' performances. \\
+In addition, the platform not only notifies participants about new battles’ creation and new tournaments’ creation, but also about the final ranking at the conclusion of battles.
+The tournament's ranking is the sum of all battles' score, is important that every user subscribed to the platform can see not just the list of all tournaments, but also their ranking. \\
+Another important offered functionality is the possibility for the tournament's creator to add some gamification badges, to further reward deserving students. Every badge has a title and a set of rules that need to be respected to obtain the badge. After gaining a badge, this is visible on student's profile by every other user subscribed to the platform. \\
+These are the principal goals and key functionalities of the CKB platform, but an in-depth exploration of its design and implementation will follow in this document.
+
+
+\subsection{Definitions, Acronyms, Abbreviations}
+\subsubsection{Definitions}
+\begin{itemize}
+    \item Students: all students who are subscribed to the platform to learn and participate in tournaments. They need a unique email to subscribe
+    \item Educators: all educators who are subscribed to the platform to create tournaments and battles. They need a unique email to subscribe
+    \item Users: all students and educators who are subscribed to the platform
+    \item Kata: an exercise in karate where you repeat a form many, many times, making little improvements in each. Code Kata is an attempt to bring this element of practice to software development
+    \item Code kata: exercise created by an educator, composed of a description and software components, including test cases and building automation scripts
+    \item Battle: a code kata battle
+    \item Platform: the CodeKataBattle platform, i.e. a system that provides a set of tools, features, and services
+\end{itemize}
+
+\subsubsection{Acronyms}
+\begin{itemize}
+    \item RASD: Requirement Analysis and Specification Document
+    \item DD: Design Document
+    \item CKB: CodeKataBattle
+    \item GH: GitHub
+    \item GHA: GitHub Action
+    \item DBMS: Database Management System
+    \item UI: User Interface
+\end{itemize}
+
+\subsubsection{Abbreviations}
+\begin{itemize}
+    \item G$n$: Goal number $n$
+    \item R$n$: Requirement number $n$
+    \item D$n$: Domain assumption number $n$
+    \item WP$n$: World phenomena number $n$
+    \item SP$n$: Shared phenomena number $n$
+    \item DP$n$: Dependency number $n$
+    \item UC$n$: Use case number $n$
+\end{itemize}
+
+\subsection{Revision history}
+\begin{itemize}
+    \item Version 1.0 - 30/12/2023
+\end{itemize}
+
+
+\subsection{Reference Documents}
+This document is based on:
+\begin{itemize}
+    \item The specification of the RASD and DD assignment given by professors Matteo Rossi, Elisabetta Di Nitto and Matteo Camilli at Politecnico di Milano, academic year 2023/2024
+    \item Slides of Software Engineering 2 course on WeBeep
+\end{itemize}
+
+\subsection{Document Structure}
+The document is made of seven chapters which describe the architecture of the system, in order to support developers who will implement it. \\
+The first chapter is the introduction of the document, which function is to highlight the purpose and the scope of the document, that briefly recalls RASD introduced concepts; it also gives important information such as definitions, acronyms and abbreviations used within the document, the revision history and the referenced documents.\\
+The second chapter contains a description of the architecture of the system, describing its component view, deployment view, runtime view and the components’ interfaces. It talks about selected architectural patterns used and other design decisions.\\
+The third chapter is about user interface design: mockups are provided to give an overview of the user interfaces of the system, coherently to what was already written in the RASD document but adding more details about links between them.\\
+The fourth chapter relates to requirements traceability, it maps the requirements previously identified and defined in the RASD document to the design elements defined in this document, as proof that the design decisions are taken coherently to the requirements, and so the goals can be fulfilled buy the designed system.\\
+The fifth chapter describes implementation, integration and test plan that programmers need to respect to develop a correct system: specific subcomponents, their integration and testing is presented here.\\
+The sixth chapter is a report containing the effort spent by each group member.\\
+Finally, the seventh and last chapter contains all the documents’ references and softwares used for the drafting of the document.

@@ -1,0 +1,39 @@
+State charts:
+
+@startuml
+[*] -> Registration
+Registration -> Started : educator starts a new tournament
+Started -> Closed : educator closes the tournament
+Closed -> [*]
+@enduml
+
+@startuml
+[*] -> Registration
+Registration -> Started : registration deadline expired
+Started -> Consolidation : battle ended
+Consolidation -> Closed : evaluation ended
+Closed -> [*]
+@enduml
+
+@startuml
+[*] --> Pending
+Pending --> Accepted: Team formed within the rules
+Pending --> Rejected: Number of team members not in range
+Rejected --> [*]
+Accepted --> [*]
+@enduml
+
+@startuml
+[*] -> RepositoryCreated
+RepositoryCreated -> WorkflowEstablished : GitHub actions configured
+WorkflowEstablished ->BattleClosed : battle's deadline expires
+BattleClosed -> [*]
+@enduml
+
+@startuml
+[*] -> RealTimeUpdate
+RealTimeUpdate -> ConsolidationStage : submission deadline expired
+ConsolidationStage -> FinalScore : educator ends the manual evaluation
+FinalScore -> [*]
+@enduml
+

@@ -21,8 +21,7 @@
 \begin{flushleft}
 \centering
 %Replace the text string with your title
-{\textcolor{Black}{\textbf{\Huge{Requirement Analysis and\\ Specification
-        Document}}}} \\ [1cm]
+{\textcolor{Black}{\textbf{\Huge{Design Document}}}} \\ [1cm]
 \end{flushleft}
 
 ~\\[2cm]
@@ -32,12 +31,13 @@
 \begin{table}[h!]
 \begin{tabu} to \textwidth { X[0.22,r,p] X[0.75,l,p] }
 \hline
-\textbf{Deliverable:} & RASD\\
-\textbf{Title:} & Requirement Analysis and Specification Document \\
+
+\textbf{Deliverable:} & DD\\
+\textbf{Title:} & Design Document \\
 \textbf{Authors:} & Annechini Alessandro, Filippi Nicole, Fiorentini Riccardo\\
 \textbf{Version:} & 1.0 \\ 
 \textbf{Date:} & 20-December-2023 \\
-\textbf{Download page:} & https://github.com/RiccardoFiorentini/AnnechiniFilippiFiorentini\\
+\textbf{Download page:} & https://github.com/RiccardoFiorentini/AnnechiniFilippiFiorentini \\
 \hline
 \end{tabu}
 \end{table}
@@ -63,21 +63,27 @@
 
 %------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage
-{\color{Black}{\section{Overall Description}}}
-\label{sect:overview}
-\input{Files/Overall_Description}
+{\color{Black}{\section{Architectural Design}}}
+\label{sect:Architectural_Design}
+\input{Files/Architectural_Design}
 
 %------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage
-{\color{Black}{\section{Specific Requirements}}}
-\label{sect:requirements}
-\input{Files/Requirements}
+{\color{Black}{\section{User Interface Design}}}
+\label{sect:User_Interface_Design.tex}
+\input{Files/User_Interface_Design.tex}
 
 %------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage
-{\color{Black}{\section{Formal Analysis Using Alloy}}}
-\label{sect:alloy}
-\input{Files/Alloy}
+{\color{Black}{\section{Requirements Traceability}}}
+\label{sect:Requirements_Traceability}
+\input{Files/Requirements_Traceability}
+
+%------------------------------------------------------------------------------------------------------------------------------------------------
+\clearpage
+{\color{Black}{\section{Implementation, Integration and Test Plan}}}
+\label{sect:Implementation_Integration}
+\input{Files/Implementation_Integration}
 
 %------------------------------------------------------------------------------------------------------------------------------------------------
 \clearpage

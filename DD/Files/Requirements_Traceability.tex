@@ -1,34 +1,235 @@
-Explain how the requirements you have defined in the RASD map to the design elements that you have defined in this document.
+In this section, the design elements employed for the fulfillment of the requirements presented in the Requirement Analysis and Specification Document are presented.
 
-%R1 The system must allow users to register on the platform
-%R2 The system must allow users to authenticate themselves and login securely
-%R3 The system must allow educators to create new tournaments
-%R4 Tournament creation must include specifying a description of the tournament
-%R5 The system must allow authorized educators to create code kata battles within a tournament
-%R6 Creation of CKB must include kata description, software project, build scripts, and scoring configurations
-%R7 The system must allow students to register for individual battles or form teams based on specified team size limits
-%R8 The system automatically creates GitHub repositories for battles
-%R9 Students must be able to fork the repository and set up automated workflows using GitHub Actions
-%R10 During the battle, the platform updates scores with every push made by students in real time
-%R11 The system must allow educators to evaluate manually submissions
-%R12 The system must allow authorized educators to add battles to tournaments
-%R13 The closure triggers updates to personal tournament scores for each student
-%R14 The system must allow educators to create badges associated with specific tournaments
-%R15 Badges are automatically assigned based on predefined rules and student performance
-%R16 The system automatically notifies students and educators about new tournaments, battles, and tournament closures
-%R17 Notifications must include deadlines and updates
-%R18 The system must allow the educator owning the tournament to authorize other educators to create CK
-
-
-\begin{table}[H]
+\begin{table}[h!]
     \centering
     \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
-        \textbf{Requirements:} & elenco \\
+        \textbf{Requirements} & R1: The system must allow users to register on the platform \\
     \hline
-        \textbf{Components:} & elenco\\
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Registration Manager
+                    \item User Manager
+                    \item Notification Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+                \item E-mail Provider
+            \end{itemize}    \\
         
     \hline
     \end{tabular}
-    \caption{Functional requirements}
-    \label{tab:requirements}
+    \caption{Requirement traceability of R1}
+    \label{tab:r1}
 \end{table}
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R2: The system must allow users to authenticate themselves and login securely \\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize} 
+                    \item Login Manager
+                    \item User Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+            \end{itemize}    \\
+        
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R2}
+    \label{tab:r2}
+\end{table}
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R3: The system must allow educators to create new tournaments \newline R4: Tournament creation must include specifying a description of the tournaments  \newline R16: The system automatically notifies students and educators about new tournaments, battles, and tournament closures \newline R17: Notifications must include deadlines and updates \newline R18: The system must allow the educator owning the tournament to authorize other educators to create CKB\\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Tournament Manager
+                    \item Authorization Manager
+                    \item Notification Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+            \end{itemize}    \\
+        
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R3, R4, R16, R17 and R18}
+    \label{tab:r3}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R5: The system must allow authorized educators to create code kata battles within a tournament \newline R6: Creation of CKB must include kata description, software project, build scripts, and scoring configurations \newline  R7: The system must allow students to register for individual battles or form teams based on specified team size limits \newline R11: The system must allow educators to manually evaluate submissions \newline R12: The system must allow authorized educators to add battles to tournaments \\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Tournament Manager
+                    \item Authorization Manager
+                    \item Battle Manager
+                    \item Notification Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+            \end{itemize}    \\
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R5, R6, R7, R11, and R12}
+    \label{tab:r5}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R8: The system automatically creates GitHub repositories for battles \newline R13: The battle closure triggers updates to personal tournament scores for each student \\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Tournament Manager
+                    \item Battle Manager
+                    \item Automated Evaluation Manager
+                    \item GitHub Integration Manager
+                    \item Notification Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+                \item GitHub
+            \end{itemize}    \\
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R8 and R13}
+    \label{tab:r8}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R9: Students must be able to fork the repository and set up automated workflows using GitHub Actions \newline R10: During the battle, the platform updates scores with every push made by students in real time\\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Tournament Manager
+                    \item Authorization Manager
+                    \item Battle Manager
+                    \item GitHub Integration Manager
+                    \item Notification Manager
+                    \item Automated Evaluation Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+                \item GitHub
+            \end{itemize}    \\
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R9 and R10}
+    \label{tab:r9}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{3cm}|p{12cm}|}    \hline
+        \textbf{Requirements} & R14: The system must allow educators to create badges associated with specific tournaments \newline R15: Badges are automatically assigned based on predefined rules and student performance \\
+    \hline
+        \textbf{Components} & 
+            \begin{itemize}
+                \item WebAPP
+                \item Web Server:
+                \begin{itemize}
+                    \item User Interface Manager 
+                    \item WebAPP Dispatcher
+                \end{itemize}
+                \item Application Server:
+                \begin{itemize}
+                    \item Badge Manager
+                    \item Tournament Manager
+                    \item Authorization Manager
+                    \item Notification Manager
+                    \item User Manager
+                \end{itemize}
+                \item Database Server:
+                 \begin{itemize}
+                    \item Physical Data Manager
+                \end{itemize}
+                \item DBMS
+            \end{itemize}    \\
+    \hline
+    \end{tabular}
+    \caption{Requirement traceability of R14 and R15}
+    \label{tab:r14}
+\end{table}
+
+

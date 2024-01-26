@@ -28,7 +28,7 @@ Upon successfully creating the Code Kata Battle, the CKB platform notifies all s
     \item \textbf{Student Participates to a Battle:} \\
     Olivia, willing to play a C\texttt{++} coding challenge with her coding club friends, initiates her participation by logging into the CKB platform. Within the platform, she navigates to the desired tournament and selects the specific battle she wishes to join. Once Olivia joins the battle, she enters the subscription phase.
 During the subscription phase, Olivia invites her friends to form a team, ensuring to respect the specified minimum and maximum number of members for that particular battle. Her friends, upon receiving the invitation, log into the CKB platform and promptly accept her invitation to become members of the team.
-To submit their code, Olivia and her teammates fork the designated GitHub repository, and they set up an automated workflow using GitHub Actions to streamline the continuous integration process. The team can submit their code by committing changes to the main branch.
+To submit their code, Olivia and her teammates fork the designated GitHub repository, and they set up an automated workflow using GitHub Actions to streamline the continuous integration process. This setup can be performed by specifying the YAML file. The team can submit their code by committing changes to the main branch.
 The CKB platform is triggered on each push, pulling the latest sources and executing the necessary tests to calculate and promptly update the team's score. This real-time scoring mechanism ensures that students and educators have instantaneous access to the latest results, fostering an environment of transparency and healthy competition.
     
 %        \begin{itemize}
@@ -127,7 +127,7 @@ The CKB platform involves several key states and transitions to facilitate the s
         \end{figure}
 
     \item \textbf{GitHub Integration:} \\
-    Following the creation of the repository by the educator, denoting the RepositoryCreated state, students are required to fork the repository. Subsequently, they must set up the automated workflow using GitHub Actions, marking the transition to the WorkflowEstablished state. As the battle concludes, the state progresses to BattleClosed, meaning that no further pushes to the repository are permitted.
+    Following the creation of the repository by the educator, denoting the RepositoryCreated state, students are required to fork the repository. Subsequently, they must set up the automated workflow using GitHub Actions (setting the YAML file), marking the transition to the WorkflowEstablished state. As the battle concludes, the state progresses to BattleClosed, meaning that no further pushes to the repository are permitted.
         \begin{figure}[H]
               \centering
               \includegraphics[width=1\textwidth]{Images/SC_GitHubConfiguration.png}
@@ -159,7 +159,7 @@ The CKB platform involves several key states and transitions to facilitate the s
     Students have the option to register either individually for specific battles or collaboratively form teams, adhering to the predetermined team size limits. It's important to note that the team formation process occurs prior to the registration deadline.
 
     \item \textbf{GitHub Integration} \\
-    Following the registration deadline, the platform generates a dedicated GitHub repository for each participating team, a repository that students are required to fork. Additionally, students must configure automated workflows utilizing GitHub Actions to facilitate continuous integration and evaluation. This setup ensures that with every commit made to the main branch, the CKB platform is triggered, updating scores in real time. This workflow guarantees efficient collaboration and real-time feedback for participating teams.
+    Following the registration deadline, the platform generates a dedicated GitHub repository and gives students the authorization to fork it. Additionally, students must configure automated workflows utilizing GitHub Actions to facilitate continuous integration and evaluation. This setup ensures that with every commit made to the main branch, the CKB platform is triggered, updating scores in real time. This workflow guarantees efficient collaboration and real-time feedback for participating teams.
 
     \item \textbf{Scoring evaluation} \\
     The platform conducts automated evaluations containing functional aspects, timeliness, and source code quality. These evaluations result in real-time updates to scores, providing instant visibility for students and educators on the platform. Moreover, educators can perform manual evaluations and assign personal scores if necessary, contributing to a comprehensive and dynamic assessment process.
@@ -205,7 +205,7 @@ The following assumptions are made to clarify the domain in which the software r
     \hline
         D4 & Notification must arrive to connected users in one minute \\
     \hline
-        D5 & Students are required to have a GitHub account for participation, and the platform \\ & assumes that students have the necessary permissions to fork repositories \\
+        D5 & Students are required to have a GitHub account for participation, with the same \\ & email address of the CKB account \\
     \hline
         D6 & Users dispone of an e-mail address \\
     \hline

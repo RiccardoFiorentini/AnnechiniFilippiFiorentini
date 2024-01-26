@@ -265,6 +265,19 @@ In the following sections there is a presentation about the components of the sy
 
     \newpage
 
+    \item \textbf{Real-time battle rank visualization:}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Images/RV13.png}
+        \caption{Real-time Battle Rank Visualization runtime view}
+        \label{fig:rv13}
+    \end{figure}
+
+    This sequence diagram shows all the actions performed when and user (either a student or an educator), requests the current rank of a battle. Once the "battles" page has been displayed, the user selects the battle whose rank they are interested in. The request is forwarded to the User Interface Manager, that is responsible for collecting the data to be displayed. When the Battle Manager is consulted, after checking that the user has permission to access the data (in order to see the battle's rank, the user must be involved in a battle, either as the creator or as a participant), it queries the Physical Data Manager, returning the requested ranking to the User Interface Manager, that finally loads the rank page to show to the user.
+
+    \newpage
+
     \item \textbf{Code Manual Evaluation and Rank Calculation:}
 
     \begin{figure}[H]
@@ -279,6 +292,19 @@ In the following sections there is a presentation about the components of the sy
 
     \newpage
 
+    \item \textbf{Tournament Rank Visualization:}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Images/RV14.png}
+        \caption{Tournament Rank Visualization runtime view}
+        \label{fig:rv14}
+    \end{figure}
+
+    This sequence diagram shows all the actions performed when and user (either a student or an educator), requests the current rank of a tournament. In order to be able to see the rank of all ongoing or closed tournaments, the user first enters the "search" page. From there, the user insert an identification of the requested tournament (i.e. the name or part of it). The request is sent to the Tournament Manager, which in turn provides the set of tournaments corresponding to the provided id. Once the list of tournaments has been displayed to the user, they select the tournament whose rank they are interested in. The request is again forwarded to the Tournament Manager, that after an authorization check returns to the User Interface Manager the rank. Finally, the User Interface Manager prepares the content to be provided to the user.
+
+    \newpage
+
     \item \textbf{Tournament Closure and Badge Obtaining:}
 
     \begin{figure}[H]
@@ -289,6 +315,19 @@ In the following sections there is a presentation about the components of the sy
     \end{figure}
 
     This sequence diagram shows all the actions performed when an educator closes a tournament. After the educator selects the tournament to close from the "tournaments" page, the request is sent to the Tournament Manager that performs the required authorization checks. The Badge Manager is then responsible for collecting all the necessary data and checking, for each student subscribed to the tournament, if the constraints for winning each of the badges (defined during the tournament creation) are respected. If so, the badge is sent to the User Manager, which is responsible for adding the badge to the student's profile. At the end of the badge assignation process, the tournament is officially closed and a notification is sent to all the registered students.
+
+    \newpage
+
+    \item \textbf{Student Profile Visualization:}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Images/RV15.png}
+        \caption{Student Profile Visualization runtime view}
+        \label{fig:rv15}
+    \end{figure}
+
+    This sequence diagram shows all the actions performed when and user (either a student or an educator), requests the profile of a student, containing information such as the badges earned by the student. The user first enters the "search" page. From there, the user insert an identification of the requested student (i.e. the username or part of it). The request is sent to the User Manager, which in turn provides the set of students corresponding to the provided id. Once the list of students has been displayed to the user, they select the students whose profile they are interested in. The request is again forwarded to the User Manager, that after an authorization check returns to the User Interface Manager the student's data. Finally, the User Interface Manager prepares the content to be provided to the user.
 
 \end{itemize}
 
@@ -412,6 +451,10 @@ In the following sections there is a presentation about the components of the sy
         \item inviteEducatorPage(educator, tournament)
         \item tournamentBadgesPage(educator, tournament)
         \item battleFinalSubmissionsPage(educator, battle\_final\_submissions)
+        \item battleRankPage(battle\_info)
+        \item searchPage()
+        \item tournamentRankPage(tournament\_info)
+        \item studentProfilePage(student\_info)
         
     \end{itemize}
 
@@ -420,6 +463,8 @@ In the following sections there is a presentation about the components of the sy
         \item awardBadges(tournament)
         \item checkBadge(student, badge, tournament)
     \end{itemize}
+
+    \newpage
 
     \item \textbf{Notification Manager:}
     \begin{itemize}
@@ -432,8 +477,6 @@ In the following sections there is a presentation about the components of the sy
         \item notifyBattleClosure(battle)
         \item notifyTournamentClosure(battle)
     \end{itemize}
-
-    \newpage
 
     \item \textbf{Physical Data Manager:}
     \begin{itemize}
@@ -475,7 +518,6 @@ In the following sections there is a presentation about the components of the sy
         \item getBattleData(battle)
         \item updateBattleData(battle)
         \item deleteBattleData(battle)
-
         
     \end{itemize}
     
@@ -487,6 +529,9 @@ In the following sections there is a presentation about the components of the sy
 \begin{itemize}
     \item \textbf{3-Tier Architecture:} \\
     The CKB platform is based on a 3-tier architecture, that organize its system’s components logically and physically into three distinct tiers: presentation, application, and data tier. Thanks to the modularization, this architecture allows for a clear division of responsibilities, promotes modularity and scalability, facilitating efficient development and maintenance, and guarantees a higher flexibility by allowing to develop and update a specific part of the system at time. 
+    
+    \item \textbf{Chain of Responsibility Pattern:} \\
+    It's employed to establish a chain of handler objects. Each handler has the capability to process a request or pass it along the chain. This pattern enhances flexibility by allowing multiple objects to handle a request without the sender needing to specify the exact handler. It’s particularly useful for processing various user requests and system events, enabling a modular and scalable approach to request handling. In CKB system the first chain link is the dispatcher, which is in charge of passing the request to one or more components. Each component then handles the request, forwarding it to the other components if necessary.
 
     \item \textbf{Microservices Architecture:} \\
     The CKB platform's architecture is based on a microservices architectural style. Microservices break down the system into independently deployable and scalable services, enhancing agility and adaptability. Each component of the system embodies a small set of functionalities related to single entities (tournaments, battles, ...), and the common operations performed by each component, such as data retrieval or the preparation of the user interface to display, are allocated to specialized components.
@@ -496,9 +541,6 @@ In the following sections there is a presentation about the components of the sy
 
     \item \textbf{Observer Pattern for Subscriptions:} \\
     For subscription management, the CKB platform uses the observer pattern. This pattern establishes a one-to-many dependency between objects, ensuring that when one object changes state, all its dependents are notified and updated automatically. Applied to subscriptions, this enables real-time notifications to students about upcoming battles and changes in tournament status.
-
-    \item \textbf{Chain of Responsibility Pattern:} \\
-    It's employed to establish a chain of handler objects. Each handler has the capability to process a request or pass it along the chain. This pattern enhances flexibility by allowing multiple objects to handle a request without the sender needing to specify the exact handler. It’s particularly useful for processing various user requests and system events, enabling a modular and scalable approach to request handling. In CKB system the first chain link is the dispatcher, which is in charge of passing the request to one or more components. Each component then handles the request, forwarding it to the other components if necessary.
 
     \item \textbf{Command-Query Separation (CQS):} \\
     This pattern separates the methods that modify data (commands) from the methods that return data (queries) to improve clarity and maintainability. Commands and queries are distinct, preventing unintended side effects when retrieving information. It is employed in the Physical Data Manager: the component offers, in addition to interfaces for generic queries, specific types of requests and commands for each case. 

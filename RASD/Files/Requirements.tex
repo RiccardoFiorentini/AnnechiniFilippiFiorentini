@@ -220,11 +220,11 @@ In order to provide all the desired services and functionalities, the system req
     \hline
         R10 & During the battle, the platform updates scores with every push made by students in real time\\
     \hline
-        R11 & The system must allow educators to evaluate manually submissions\\
+        R11 & The system must allow educators to manually evaluate submissions\\
         \hline
         R12 & The system must allow authorized educators to add battles to tournaments\\
     \hline
-        R13 & The closure triggers updates to personal tournament scores for each student\\
+        R13 & The battle closure triggers updates to personal tournament scores for each student\\
     \hline
         R14 & The system must allow educators to create badges associated with specific tournaments\\
     \hline
@@ -480,7 +480,8 @@ After choosing the creation of a student account, a simple interface allows the 
    \end{table}
    
    \item \textbf{Battle Creation:}
-An educator can create a battle and add it to a tournament on the platform. To do this the educator must be not just logged into the platform, but they must have permission to insert a battle in that tournament. The “TournamentManager” is responsible for checking if the educator can add their battle in that tournament on the DBMS. If they have permission, they can then use a form to upload the code kata, with a description and the software project, including test cases and build automation scripts, to set the minimum and maximum number of admitted students per group, the registration deadline, the final submission deadline and any additional configurations for scoring. All data are checked by the system and then inserted into the DB by a logic unit named “BattleManager”, that communicates with the DBMS.
+    An educator can create a battle and add it to a tournament on the platform. To do this the educator must be logged in and have permission to insert a battle in that tournament.  
+    The “TournamentManager” is responsible for checking if the educator can add their battle in that tournament on the DBMS. If they have permission, they can then use a form to upload the code kata, with a description and the software project, including test cases and build automation scripts, to set the minimum and maximum number of admitted students per group, the registration deadline, the final submission deadline and any additional configurations for scoring. All data are checked by the system and then inserted into the DB by a logic unit named “BattleManager”, that communicates with the DBMS.
     
    \begin{table}[H]
        \centering
@@ -500,7 +501,8 @@ An educator can create a battle and add it to a tournament on the platform. To d
                 \item Educator selects registration deadline and submission deadline 
                 \item Educator clicks on the "Upload" button to upload the code kata, which includes test cases and build automation scripts
                 \item Educator clicks on the "Configure" button to set group parameters and any additional configurations for evaluating
-                \item Educator clicks on the "Create" button
+                \item Educator clicks on the "Create" button                
+                \item System creates GitHub repository            
                 \item System inserts battle's new data into DB
                 \item System shows the new battle to Battles screen of students that are subscribed to that tournament 
                 \item System sends a notification to subscribed students
@@ -562,7 +564,7 @@ An educator can create a battle and add it to a tournament on the platform. To d
    \newpage
    
    \item \textbf{Battle Join:}
-   A student can join a battle if and only if they are subscribed to the tournament it belongs to and logged in. The “Tournament Manager” is responsible for checking if the student is subscribed to the tournament. When joining a battle, the student can choose between using the platform to form a team with other students (by sending them an invitation) or doing it on their own. If the number of students in the formed team respects the set values then it’s accepted and the students composing the team can participate in the competition. The “BattleManager” is the component that does this check. When the registration deadline expires, the platform creates a GitHub repository containing the code kata and then sends the link to all students who joined. At this point, students can start working on the project.
+   A student can join a battle if and only if they are subscribed to the tournament it belongs to and logged in. The “Tournament Manager” is responsible for checking if the student is subscribed to the tournament. When joining a battle, the student can choose between form a team with other students by sending them an invitation or doing it on their own. If the number of students in the formed team respects the set values then it’s accepted can participate in the competition. The “BattleManager” is the component that does this check. When the registration deadline expires, the platform creates a GitHub repository containing the code kata and sets GitHub Action's YAML file, then gives all students who joined permission to fork it and sends them the link.Students can start working on the project.
    
    \begin{table}[H]
        \centering
@@ -579,10 +581,12 @@ An educator can create a battle and add it to a tournament on the platform. To d
                 \item Student opens the Battle screen
                 \item Student clicks on the "Create team" button for the correct battle
                 \item Student can choose between inviting other subscribed students using the form shown by the system or joining it on their own
-                \item System sends any team invitation and elaborates responses (see UC10) \item System checks if battle's team constraints are respected
+                \item System sends any team invitation and elaborates responses (see UC10)
+                \item System checks if battle's team constraints are respected
                 \item System inserts team's information into DB
                 \item Team's students automatically join the battle
-                \item System creates a GitHub repository containing the code kata and sends the link to teams
+                \item System creates a GitHub repository containing the code kata and sets GHA's YAML file
+                \item System gives permissions to fork the corresponding repository and sends the link to teams
                 \item System shows the battle in the student's Battle screen                
             \end{itemize}\\
         \hline
@@ -780,6 +784,97 @@ An educator can create a battle and add it to a tournament on the platform. To d
        \caption{UC14: Badges Obtaining}
        \label{tab:uc14}
    \end{table}
+
+   \newpage
+
+    \item \textbf{Battle's Ranking Visualization:}
+    Students who joined a battle and the educator that creates it can see the real-time ranking of that battle. The "BattleManager" component checks if the user can access the ranking of a certain battle. The same component provides the updated ranking.
+    
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|l|m{11cm}|}
+        \hline
+            Name & Users visualize battle's ranking\\
+        \hline
+            Actors & Educator, Joined students \\
+        \hline
+            Entry Condition & Student has already logged in and has joined the battle. Educator has created the battle \\
+        \hline
+            Event Flow & 
+            \begin{itemize}
+                \item User opens Battle screen
+                \item User clicks on the "View rank" button
+                \item System provides the updated ranking and shows it
+            \end{itemize}\\
+        \hline
+            Exit Conditions & User can see the updated ranking on Battle screen\\
+        \hline
+            Exceptions & The ranking is not showed if:
+            \begin{itemize}
+                \item Educator is not the creator of the battle
+                \item Student has not joined the battle
+            \end{itemize}\\
+        \hline
+       \end{tabular}
+       \caption{UC15: Battle's Ranking visualization}
+       \label{tab:uc15}
+   \end{table}
+
+    \item \textbf{Tournament's Ranking Visualization:}
+    Every user subscribed to the platform can see the real-time ranking of a tournament. “TournamentManager” is the component responsible for providing the updated ranking.
+    
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|l|m{11cm}|}
+        \hline
+            Name & Visualize tournament's ranking\\
+        \hline
+            Actors & Educator, Students\\
+        \hline
+            Entry Condition & User has already logged in\\
+        \hline
+            Event Flow & 
+            \begin{itemize}
+                \item User opens Search screen
+                \item User searches the interested tournament
+                \item System provides the updated ranking and shows it
+            \end{itemize}\\
+        \hline
+            Exit Conditions & User can see the updated ranking of the tournament\\
+        \hline
+       \end{tabular}
+       \caption{UC16: Tournament's Ranking visualization}
+       \label{tab:uc16}
+   \end{table}
+
+   \newpage
+
+       \item \textbf{Student's Profile Visualization:}
+    Every user subscribed to the platform can see the profile of a student. “UserManager” is the component responsible for providing the student's informations.
+    
+   \begin{table}[H]
+       \centering
+       \begin{tabular}{|l|m{11cm}|}
+        \hline
+            Name & Visualize student's profile\\
+        \hline
+            Actors & Educator, Students\\
+        \hline
+            Entry Condition & User has already logged in\\
+        \hline
+            Event Flow & 
+            \begin{itemize}
+                \item User opens Search screen
+                \item User searches the interested student
+                \item System provides the informations and shows them
+            \end{itemize}\\
+        \hline
+            Exit Conditions & User can see the student's profile\\
+        \hline
+       \end{tabular}
+       \caption{UC17: Student's Profile visualization}
+       \label{tab:uc17}
+   \end{table}
    
 \end{enumerate}
 
@@ -933,6 +1028,34 @@ An educator can create a battle and add it to a tournament on the platform. To d
 
 \newpage
 
+\textbf{[UC15] - Battle Ranking Visualization}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/SD_BattleRank.png}
+    \caption{UC15 sequence diagram}
+    \label{fig:uc15}
+\end{figure}
+
+\textbf{[UC16] - Tournament Ranking Visualization}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/SD_TournamentRank.png}
+    \caption{UC16 sequence diagram}
+    \label{fig:uc16}
+\end{figure}
+
+\newpage
+
+\textbf{[UC17] - Student Profile Visualization}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/SD_StudentProfile.png}
+    \caption{UC17 sequence diagram}
+    \label{fig:uc17}
+\end{figure}
+
+\newpage
+
 \subsubsection{Requirements mapping}
 
 \begin{table}[h!]
@@ -974,11 +1097,11 @@ An educator can create a battle and add it to a tournament on the platform. To d
         R7: The system must allow students to register for individual battles or form teams based on specified team size limits \newline
         R9: Students must be able to fork the repository and set up automated workflows using GitHub Actions \newline
         R12: The system must allow authorized educators to add battles to tournaments \newline 
-        R13: The closure triggers updates to personal tournament scores for each student 
+        R13: The battle closure triggers updates to personal tournament scores for each student 
         &
         D1: Users (educators and students) have basic proficiency in using web-based platforms and are familiar with version control systems, such as Git \newline 
         D3: Educators and students can connect to the Internet with their devices \newline
-        D5: Students are required to have a GitHub account for participation, and the platform assumes that students have the necessary permissions to fork repositories\newline
+        D5: Students are required to have a GitHub account for participation, with the same email address of the CKB account \newline
         D6: Users dispone of an e-mail address \newline
         D7: Users need a reliable internet connection to interact with the CKB platform\newline
         \\
@@ -1014,8 +1137,8 @@ An educator can create a battle and add it to a tournament on the platform. To d
         R1: The system must allow users to register on the platform \newline
         R2: The system must allow users to authenticate themselves and log in securely \newline
         R10: During the battle, the platform updates scores with every push made by students in real-time \newline
-        R11: The system must allow educators to evaluate manually submissions \newline
-        R13: The closure triggers updates to personal tournament scores for each student
+        R11: The system must allow educators to manually evaluate submissions \newline
+        R13: The battle closure triggers updates to personal tournament scores for each student
         &
         D3: Educators and students can connect to the Internet with their devices \newline
         D6: Users dispone of an e-mail address \newline
@@ -1035,7 +1158,7 @@ An educator can create a battle and add it to a tournament on the platform. To d
         R1: The system must allow users to register on the platform \newline
         R2: The system must allow users to authenticate themselves and log in securely \newline
         R10: During the battle, the platform updates scores with every push made by students in real-time \newline
-        R13: The closure triggers updates to personal tournament scores for each student 
+        R13: The battle closure triggers updates to personal tournament scores for each student 
         &
         D3: Educators and students can connect to the Internet with their devices \newline
         D6: Users dispone of an e-mail address \newline
@@ -1053,12 +1176,12 @@ An educator can create a battle and add it to a tournament on the platform. To d
     \hline
         R1: The system must allow users to register on the platform  \newline
         R2: The system must allow users to authenticate themselves and log in securely \newline
-        R11: The system must allow educators to evaluate manually submissions \newline
-        R13: The closure triggers updates to personal tournament scores for each student \newline
+        R11: The system must allow educators to manually evaluate submissions \newline
+        R13: The battle closure triggers updates to personal tournament scores for each student \newline
         &
         D1: The users (educators and students) have basic proficiency in using web-based platforms and are familiar with version control systems, such as Git \newline
         D3: Educators and students can connect to the Internet with their devices \newline
-        D5: Students are required to have a GitHub account for participation, and the platform assumes that students have the necessary permissions to fork repositories \newline
+        D5: Students are required to have a GitHub account for participation, with the same email address of the CKB account \newline
         D7: Users need a reliable internet connection to interact with the CKB platform\\
     \hline
     \end{tabular}
